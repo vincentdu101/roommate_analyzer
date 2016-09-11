@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import Table from "react-bootstrap/lib/Table";
-
+import Room from "./room.js"
 
 var RoomsIndex = React.createClass({
 
 	getInitialState: function() {
-		return { rooms: [] };
+		return { data: [] };
 	},
 
 	componentDidMount: function() {
@@ -28,8 +28,10 @@ var RoomsIndex = React.createClass({
 
 	render: function() {
 		return (
+
 		  <Table striped bordered condensed hover>
 		    <thead>
+
 		      <tr>
 		        <th>#</th>
 		        <th>First Name</th>
@@ -38,23 +40,15 @@ var RoomsIndex = React.createClass({
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <td>1</td>
-		        <td>Mark</td>
-		        <td>Otto</td>
-		        <td>@mdo</td>
-		      </tr>
-		      <tr>
-		        <td>2</td>
-		        <td>Jacob</td>
-		        <td>Thornton</td>
-		        <td>@fat</td>
-		      </tr>
-		      <tr>
-		        <td>3</td>
-		        <td colSpan="2">Larry the Bird</td>
-		        <td>@twitter</td>
-		      </tr>
+		    	{this.state.data.map((item, i) =>{
+		    		return (
+		    			<tr className="room">
+      					<td>{item.id}</td>
+       					 <td>{item.size}</td>
+        				<td>{item.availablity_date}</td>
+     					</tr>
+		    		)
+		    	})}
 		    </tbody>
 		  </Table>	
 		);
