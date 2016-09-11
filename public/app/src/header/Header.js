@@ -12,7 +12,7 @@ var Header = React.createClass({
 		  <Navbar>
 		    <Navbar.Header>
 		      <Navbar.Brand>
-		        <a href="#">React-Bootstrap</a>
+		        <a href=""><img src="http://localhost:3000/create_thumb.png" width="100" height="100" /></a>
 		      </Navbar.Brand>
 		    </Navbar.Header>
 		    <Nav>
