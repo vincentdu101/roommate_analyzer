@@ -10,11 +10,32 @@ import Dropzone from "react-dropzone";
 
 var Profile = React.createClass({
 	getInitialState: function() {
-	    return {email: "", name: "", password: "", files: []};
+	    return {
+	    	email: "", 
+	    	first_name: "", 
+	    	last_name: "", 
+	    	password: "", 
+	    	age: "",
+	    	gender: "",
+	    	postSuccess: false,
+	    	files: []
+	    };
 	},
 
-	handleNameChange: function(e) {
-	    this.setState({name: e.target.value});
+	handleFirstNameChange: function(e) {
+	    this.setState({first_name: e.target.value});
+	},	
+
+	handleLastNameChange: function(e) {
+	    this.setState({last_name: e.target.value});
+	},	
+
+	handleAgeChange: function(e) {
+	    this.setState({age: e.target.value});
+	},	
+
+	handleGenderChange: function(e) {
+	    this.setState({gender: e.target.value});
 	},	
 
 	handleEmailChange: function(e) {
@@ -33,13 +54,16 @@ var Profile = React.createClass({
 		$.ajax({
 	      url: "http://localhost:3000/users",
 	      dataType: 'json',
+	      method: "POST",
 	      cache: false,
-	      success: function(data) {
-	        this.setState({data: data});
-	      }.bind(this),
+	      data: this.state,
+	      success: (data) => {
+	        this.setState(data);
+	        this.setState({postSuccess: true});
+	      },
 	      error: function(xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
+	      }
 	    });
 	},
 
@@ -47,13 +71,14 @@ var Profile = React.createClass({
 		return (
 	      <form className="container-fluid">
 	      	<h3>Register User</h3>
+	      	{this.state.postSuccess ? <h4>User Updated</h4> : null}
 	        <FormGroup
 	          controlId="formBasicText"
 	          className="row"
 	        >
 	          <div className="col-xs-12 col-sm-4">
 		          <ControlLabel>
-		          	Name
+		          	First Name
 		          </ControlLabel>
 		      </div>
 	          <div className="col-xs-12 col-sm-7">
@@ -61,10 +86,64 @@ var Profile = React.createClass({
 		          	className=""
 		            type="text"
 		            placeholder="Enter text"
-		            onChange={this.handleNameChange}
+		            onChange={this.handleFirstNameChange}
 		          />
 		      </div>
 	        </FormGroup>
+	        <FormGroup
+	          controlId="formBasicText"
+	          className="row"
+	        >
+	          <div className="col-xs-12 col-sm-4">
+		          <ControlLabel>
+		          	Last Name
+		          </ControlLabel>
+		      </div>
+	          <div className="col-xs-12 col-sm-7">
+		          <FormControl
+		          	className=""
+		            type="text"
+		            placeholder="Enter text"
+		            onChange={this.handleLastNameChange}
+		          />
+		      </div>
+	        </FormGroup>
+	       	<FormGroup
+	          controlId="formBasicText"
+	          className="row"
+	        >
+	          <div className="col-xs-12 col-sm-4">
+		          <ControlLabel>
+		          	Gender
+		          </ControlLabel>
+		      </div>
+	          <div className="col-xs-12 col-sm-7">
+		          <FormControl
+		          	className=""
+		            type="text"
+		            placeholder="Enter text"
+		            onChange={this.handleGenderChange}
+		          />
+		      </div>
+	        </FormGroup>
+	        <FormGroup
+	          controlId="formBasicText"
+	          className="row"
+	        >
+	          <div className="col-xs-12 col-sm-4">
+		          <ControlLabel>
+		          	Age
+		          </ControlLabel>
+		      </div>
+	          <div className="col-xs-12 col-sm-7">
+		          <FormControl
+		          	className=""
+		            type="text"
+		            placeholder="Enter text"
+		            onChange={this.handleAgeChange}
+		          />
+		      </div>
+	        </FormGroup>	        
 	        <FormGroup
 	          controlId="formBasicText"
 	          className="row"
