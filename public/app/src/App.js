@@ -10,7 +10,7 @@ import Home from "./home/Home.js";
 
 var navEvents = {
   "Profile": "profileNav",
-  "Rentals": "roomsNav",
+  "Find a Rental": "roomsNav",
   "Create a Rental": "roomsCreateNav",
   "Assessment": "assessmentNav"
 };
@@ -61,7 +61,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <Header items={['Profile', 'Rentals', 'Create a Rental', 'Assessment']} navEvent={this.navTriggered} />
+        <Header items={['Profile', 'Find a Rental', 'Create a Rental', 'Assessment']} navEvent={this.navTriggered} />
         {this.state.home ? <Home /> : null}
         {this.state.profile ? <Profile /> : null}
         {this.state.rooms ? <RoomsIndex /> : null}

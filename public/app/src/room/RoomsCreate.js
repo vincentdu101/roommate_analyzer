@@ -14,7 +14,8 @@ var RoomsCreate = React.createClass({
 	    	size: "", 
 	    	availablity_date: "", 
 	    	rent: "",
-	    	postSuccess: false
+	    	postSuccess: false,
+	    	user_id: sessionStorage["user_id"]
 	    };
 	},
 

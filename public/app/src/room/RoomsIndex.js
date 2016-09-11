@@ -9,21 +9,20 @@ var RoomsIndex = React.createClass({
 	},
 
 	componentDidMount: function() {
-		console.log("Rooms componentDidMount")
-    $.ajax({
-      url: "http://localhost:3000/rooms",
-      crossDomain: true,
-      dataType: 'json',
-      cache: false,
+	    $.ajax({
+	      url: "http://localhost:3000/rooms",
+	      crossDomain: true,
+	      dataType: 'json',
+	      cache: false,
 
-      success: function(data) {
-      	console.log(data);
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+	      success: function(data) {
+	      	console.log(data);
+	        this.setState({data: data});
+	      }.bind(this),
+	      error: function(xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
   },
 
 	render: function() {

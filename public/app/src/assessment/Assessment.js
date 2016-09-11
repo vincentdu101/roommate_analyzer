@@ -13,21 +13,43 @@ import React, {Component} from "react";
 
 var Assessment = React.createClass({
 
+	createAssessment: function(callback) {
+		var secretKey = "8i4i7uusnc5g2pg4909olnsqiu";
+		var jsonMimeType = "application/json;charset=UTF-8";
+		$.ajax({
+	      url: "https://api-sandbox.traitify.com/v1/assessments",
+	      method: "POST",
+	      cache: false,
+	      data: JSON.stringify({"deck_id": "core"}),
+		  beforeSend: function (xhr) {
+		    xhr.setRequestHeader ("Authorization", "Basic " + secretKey + ":x");
+		  },	      
+	      success: (data) => {
+	        callback(data.id);
+	      },
+	      error: function(xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }
+	    });
+	},
+
 	componentWillMount: function () {
 	  document.body.innerHTML += "<div class='assessment'></div>";
       Traitify.setPublicKey("lmd71vappngqh4cbac5vanegf5");
       Traitify.setHost("https://api-sandbox.traitify.com");
       Traitify.setVersion("v1");
       var assessmentId = '82188545-c03d-4bbd-8208-fa057ade87a6';
-      var traitify = Traitify.ui.load(assessmentId, ".assessment");
-      traitify.slideDeck.onFinished(function(data){
-	    console.log(data.data);
-	    console.log("Finished!");
-	  });
-
+      this.createAssessment(function(assessmentId){
+      	  var traitify = Traitify.ui.load(assessmentId, ".assessment");
+	      traitify.slideDeck.onFinished(function(data){
+		    console.log(data.data);
+		    console.log("Finished!");
+		  });
+      });
 	},
 
 	render: function() {
+		return null;
 	}
 
 });
