@@ -12,7 +12,7 @@ var Header = React.createClass({
 		  <Navbar>
 		    <Navbar.Header>
 		      <Navbar.Brand>
-		        <a href="#">React-Bootstrap</a>
+		        <a href="">Roomie Perfecto</a>
 		      </Navbar.Brand>
 		    </Navbar.Header>
 		    <Nav>

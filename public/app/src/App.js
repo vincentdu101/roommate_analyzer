@@ -5,42 +5,67 @@ import Profile from "./profile/Profile.js";
 import RoomsIndex from "./room/RoomsIndex.js";
 import Header from "./header/Header.js";
 import Assessment from "./assessment/Assessment.js";
+import RoomsCreate from "./room/RoomsCreate.js";
 import Home from "./home/Home.js";
+
+var navEvents = {
+  "Profile": "profileNav",
+  "Rentals": "roomsNav",
+  "Create a Rental": "roomsCreateNav",
+  "Assessment": "assessmentNav"
+};
 
 var App = React.createClass({
 
   resetState: function() {
-    this.state.props = {profile: false, rooms: false, assessment: false, home: false};
+    this.setState({
+      profile: false, 
+      rooms: false, 
+      roomsCreate: false,
+      assessment: false, 
+      home: false
+    });
   },
 
   getInitialState: function() {
-      return {profile: false, rooms: false, assessment: false, home: true};
+      return {
+        profile: false, 
+        rooms: false, 
+        roomsCreate: false,
+        assessment: false, 
+        home: true
+      };
   },
 
-  triggerProfileNav: function() {
+  profileNav: function() {
       return this.setState({profile: true});
   },
 
-  triggerRoomsNav: function() {
+  roomsNav: function() {
       return this.setState({rooms: true});
   },
 
-  triggerAssessmentNav: function() {
+  roomsCreateNav: function() {
+      return this.setState({roomsCreate: true});
+  },
+
+  assessmentNav: function() {
       return this.setState({assessment: true});
   },
 
   navTriggered: function(prop) {
       this.resetState();
-      return this["trigger" + prop + "Nav"]();
+      return this[navEvents[prop]]();
   },
 
   render: function() {
     return (
       <div>
-        <Header items={['Profile', 'Rooms', 'Assessment']} navEvent={this.navTriggered} />
+        <Header items={['Profile', 'Rentals', 'Create a Rental', 'Assessment']} navEvent={this.navTriggered} />
         {this.state.home ? <Home /> : null}
         {this.state.profile ? <Profile /> : null}
         {this.state.rooms ? <RoomsIndex /> : null}
+        {this.state.roomsCreate ? <RoomsCreate /> : null}
         {this.state.assessment ? <Assessment /> : null}
       </div>
     );
